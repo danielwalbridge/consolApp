@@ -1,4 +1,4 @@
-package com.example.consolapp.commandLine;
+package com.example.consolapp.commandLineInterface;
 
 import com.example.consolapp.communication.ConsoleCommunication;
 import jakarta.annotation.PostConstruct;
@@ -10,16 +10,22 @@ import java.util.List;
 import java.util.Scanner;
 
 @Component
-public class CommandLine  {
+public class CommandLineInterface {
 
     private final List<String> userHelpOptions = populateUserHelpOptions();
 
     @Autowired
    private ConsoleCommunication communication;
 
+    private boolean displayWelcomeMessage = true;
+
     @PostConstruct
     public void consoleMain() {
         while (true) {
+            if (displayWelcomeMessage) {
+                System.out.println("Welcome to the GoodReads search CLI: Please enter a function, or enter in --help for a list of approved functions");
+                displayWelcomeMessage= false;
+            }
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
 
@@ -41,14 +47,16 @@ public class CommandLine  {
                 continue;
             }
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
-                System.out.println("here are the search options");
+                System.out.println("you have selected the search function. please enter the search term to be sent to GoodReads");
                 continue;
             }
             if (line.equalsIgnoreCase("-sort")) {
+                //todo ability to sort already searched calls
                 System.out.println("here are your sort options");
                 continue;
             }
             if (line.equalsIgnoreCase("stop")) {
+                //todo add an are you sure function to this
                 System.exit(0);
             }
             else {
@@ -58,7 +66,6 @@ public class CommandLine  {
         }
 
     }
-
     private List<String> populateUserHelpOptions() {
         List<String> userOptions = new ArrayList<>();
         userOptions.add("--help : print out the accepted inputs ");
@@ -68,9 +75,4 @@ public class CommandLine  {
         userOptions.add("stop : will stop the application");
         return userOptions;
     }
-
-//    @Override
-//    public void run(String... args) throws Exception {
-//
-//    }
 }
