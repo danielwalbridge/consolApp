@@ -36,14 +36,14 @@ public class CommandLineInterface {
                 continue;
             }
             if (line.equalsIgnoreCase("-h") || line.equalsIgnoreCase("--host")) {
-                String hostinfo = "";
+                String hostInfo = "";
                 try {
-                     hostinfo = communication.getHostInformation();
+                     hostInfo = communication.getHostInformation();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(hostinfo);
+                System.out.println(hostInfo);
                 continue;
             }
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
