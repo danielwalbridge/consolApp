@@ -49,13 +49,20 @@ public class CommandLineInterface {
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
                 System.out.println("you have selected the search function. \n please enter the search term to be sent to GoodReads");
 
-                // grab search term to be use in call.
-                String searchTerm = scanner.nextLine();
-                String serverResults = communication.getResultsFromServer(searchTerm);
-                System.out.println("You are getting back " +serverResults);
-
-                // need to call communication to get the info back.
-
+                try {
+                    String searchTerm = scanner.nextLine();
+                    if (searchTerm.isBlank()) {
+                        System.out.println("You need to enter something in order for a search to happen");
+                        displayWelcomeMessage = true;
+                    }
+                    else {
+                        String serverResults = communication.getResultsFromServer(searchTerm);
+                        System.out.println("You are getting back " +serverResults);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
                 continue;
             }
             if (line.equalsIgnoreCase("-sort")) {
