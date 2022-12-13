@@ -47,7 +47,15 @@ public class CommandLineInterface {
                 continue;
             }
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
-                System.out.println("you have selected the search function. please enter the search term to be sent to GoodReads");
+                System.out.println("you have selected the search function. \n please enter the search term to be sent to GoodReads");
+
+                // grab search term to be use in call.
+                String searchTerm = scanner.nextLine();
+                String serverResults = communication.getResultsFromServer();
+                System.out.println(serverResults);
+
+                // need to call communication to get the info back.
+
                 continue;
             }
             if (line.equalsIgnoreCase("-sort")) {
