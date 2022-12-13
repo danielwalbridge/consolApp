@@ -51,8 +51,8 @@ public class CommandLineInterface {
 
                 // grab search term to be use in call.
                 String searchTerm = scanner.nextLine();
-                String serverResults = communication.getResultsFromServer();
-                System.out.println(serverResults);
+                String serverResults = communication.getResultsFromServer(searchTerm);
+                System.out.println("You are getting back " +serverResults);
 
                 // need to call communication to get the info back.
 

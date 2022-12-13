@@ -27,13 +27,13 @@ public class ConsoleCommunication {
         return response;
     }
 
-    public String getResultsFromServer() {
+    public String getResultsFromServer(String searchTerm) {
 
         // get ServiceInstance list using serviceId
         ServiceInstance serviceInstance = loadBalancerClient.choose("SERVER-SERVICE");
 
         // endpoint // read URI and Add path that returns url
-        String url = serviceInstance.getUri()+"/server/search";
+        String url = serviceInstance.getUri()+"/server/search/"+ searchTerm;
         //RestTemplate create object for RestTemplate
         RestTemplate restTemplate = new RestTemplate();
 
