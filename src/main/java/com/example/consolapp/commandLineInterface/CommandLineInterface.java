@@ -42,23 +42,7 @@ public class CommandLineInterface {
             }
 
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
-                System.out.println("you have selected the search function. \n please enter the search term to be sent to GoodReads");
-
-                try {
-                    String searchTerm = scanner.nextLine();
-                    if (searchTerm.isBlank()) {
-                        System.out.println("You need to enter something in order for a search to happen");
-                        displayWelcomeMessage = true;
-                    }
-                    else {
-                        String serverResults = communication.getResultsFromServer(searchTerm);
-                        System.out.println(serverResults);
-                        displayWelcomeMessage = true;
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                search(scanner);
                 continue;
             }
             if (line.equalsIgnoreCase("-sort")) {
@@ -128,5 +112,25 @@ public class CommandLineInterface {
             e.printStackTrace();
         }
         System.out.println(hostInfo);
+    }
+
+    private void search(Scanner scanner) {
+        System.out.println("you have selected the search function. \n please enter the search term to be sent to GoodReads");
+
+        try {
+            String searchTerm = scanner.nextLine();
+            if (searchTerm.isBlank()) {
+                System.out.println("You need to enter something in order for a search to happen");
+                displayWelcomeMessage = true;
+            }
+            else {
+                String serverResults = communication.getResultsFromServer(searchTerm);
+                System.out.println(serverResults);
+                displayWelcomeMessage = true;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
