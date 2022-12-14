@@ -13,49 +13,26 @@ public class ConsoleCommunication {
     private LoadBalancerClient loadBalancerClient;
 
     public String getHostInformation() {
-
-        // get ServiceInstance list using serviceId
         ServiceInstance serviceInstance = loadBalancerClient.choose("SERVER-SERVICE");
-
-        // endpoint // read URI and Add path that returns url
         String url = serviceInstance.getUri()+"/server/host";
-        //RestTemplate create object for RestTemplate
         RestTemplate restTemplate = new RestTemplate();
-
         String response = restTemplate.getForObject(url, String.class);
-
         return response;
     }
 
     public String getResultsFromServer(String searchTerm) {
-
-        // get ServiceInstance list using serviceId
         ServiceInstance serviceInstance = loadBalancerClient.choose("SERVER-SERVICE");
-
-        // endpoint // read URI and Add path that returns url
         String url = serviceInstance.getUri()+"/server/search/"+ searchTerm;
-        //RestTemplate create object for RestTemplate
         RestTemplate restTemplate = new RestTemplate();
-
         String response = restTemplate.getForObject(url, String.class);
-
         return response;
-
     }
 
     public String getResultsFromServerSort(String searchTerm,String sort) {
-
-        // get ServiceInstance list using serviceId
         ServiceInstance serviceInstance = loadBalancerClient.choose("SERVER-SERVICE");
-
-        // endpoint // read URI and Add path that returns url
         String url = serviceInstance.getUri()+"/server/search/"+ searchTerm+"/"+sort;
-        //RestTemplate create object for RestTemplate
         RestTemplate restTemplate = new RestTemplate();
-
         String response = restTemplate.getForObject(url, String.class);
-
         return response;
-
     }
 }
