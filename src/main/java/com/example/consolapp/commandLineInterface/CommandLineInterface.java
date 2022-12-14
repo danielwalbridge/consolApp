@@ -68,7 +68,6 @@ public class CommandLineInterface {
         userOptions.add("-h or --host : will print out the ip address where the server can be found");
         userOptions.add("-s or --search : will bring you to the prompt that will be used to search GoodReads");
         userOptions.add("--sort : sort the search options ");
-        userOptions.add("stop : will stop the application");
         return userOptions;
     }
 
