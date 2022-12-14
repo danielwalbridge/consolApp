@@ -1,7 +1,11 @@
 package com.example.consolapp.commandLineInterface;
 
 import com.example.consolapp.communication.ConsoleCommunication;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jakarta.annotation.PostConstruct;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -57,7 +61,8 @@ public class CommandLineInterface {
                     }
                     else {
                         String serverResults = communication.getResultsFromServer(searchTerm);
-                        System.out.println("You are getting back " +serverResults);
+                        System.out.println(serverResults);
+                        displayWelcomeMessage = true;
                     }
                 }
                 catch (Exception e) {
