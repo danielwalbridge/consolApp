@@ -42,4 +42,20 @@ public class ConsoleCommunication {
         return response;
 
     }
+
+    public String getResultsFromServerSort(String searchTerm,String sort) {
+
+        // get ServiceInstance list using serviceId
+        ServiceInstance serviceInstance = loadBalancerClient.choose("SERVER-SERVICE");
+
+        // endpoint // read URI and Add path that returns url
+        String url = serviceInstance.getUri()+"/server/search/"+ searchTerm+"/"+sort;
+        //RestTemplate create object for RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        String response = restTemplate.getForObject(url, String.class);
+
+        return response;
+
+    }
 }
