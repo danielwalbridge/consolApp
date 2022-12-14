@@ -46,38 +46,7 @@ public class CommandLineInterface {
                 continue;
             }
             if (line.equalsIgnoreCase("-sort")) {
-                System.out.println("you have selected the sort function. \n please enter the search term to be sent to GoodReads first");
-
-                try {
-                    String searchTerm = scanner.nextLine();
-                    if (searchTerm.isBlank()) {
-                        System.out.println("You need to enter something in order for a search to happen");
-                        displayWelcomeMessage = true;
-                    }
-                    else {
-                        System.out.println(" the search term you want is: " + searchTerm + " \n" +
-                                "now please enter author if you would like to search by the author \n" +
-                                "or title if you would like to search by the title \n" +
-                                "kindly note that if you enter anything else, your result will be sorted by title as a default");
-
-                        String sort = scanner.nextLine();
-
-                        if (sort.equalsIgnoreCase("author")) {
-                            // send to new method with aut
-                            String serverResults = communication.getResultsFromServerSort(searchTerm, sort);
-                            System.out.println(serverResults);
-                        }
-                        else  {
-                            sort ="title";
-                            String serverResults = communication.getResultsFromServerSort(searchTerm, sort);
-                            System.out.println(serverResults);
-                        }
-                        displayWelcomeMessage = true;
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+               sort(scanner);
             }
             else {
                 System.out.println("enter a valid input,  for a list of valid inputs please enter --help");
@@ -126,6 +95,41 @@ public class CommandLineInterface {
             else {
                 String serverResults = communication.getResultsFromServer(searchTerm);
                 System.out.println(serverResults);
+                displayWelcomeMessage = true;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sort(Scanner scanner) {
+        System.out.println("you have selected the sort function. \n please enter the search term to be sent to GoodReads first");
+
+        try {
+            String searchTerm = scanner.nextLine();
+            if (searchTerm.isBlank()) {
+                System.out.println("You need to enter something in order for a search to happen");
+                displayWelcomeMessage = true;
+            }
+            else {
+                System.out.println(" the search term you want is: " + searchTerm + " \n" +
+                        "now please enter author if you would like to search by the author \n" +
+                        "or title if you would like to search by the title \n" +
+                        "kindly note that if you enter anything else, your result will be sorted by title as a default");
+
+                String sort = scanner.nextLine();
+
+                if (sort.equalsIgnoreCase("author")) {
+                    // send to new method with aut
+                    String serverResults = communication.getResultsFromServerSort(searchTerm, sort);
+                    System.out.println(serverResults);
+                }
+                else  {
+                    sort ="title";
+                    String serverResults = communication.getResultsFromServerSort(searchTerm, sort);
+                    System.out.println(serverResults);
+                }
                 displayWelcomeMessage = true;
             }
         }
