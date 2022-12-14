@@ -2,13 +2,9 @@ package com.example.consolapp.commandLineInterface;
 
 import com.example.consolapp.communication.ConsoleCommunication;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import jakarta.annotation.PostConstruct;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
