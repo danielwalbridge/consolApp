@@ -75,10 +75,6 @@ public class CommandLineInterface {
                 System.out.println("here are your sort options");
                 continue;
             }
-            if (line.equalsIgnoreCase("stop")) {
-                //todo add an are you sure function to this
-                System.exit(0);
-            }
             else {
                 System.out.println("enter a valid input,  for a list of valid inputs please enter --help");
             }
