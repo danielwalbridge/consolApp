@@ -22,30 +22,25 @@ public class CommandLineInterface {
     @PostConstruct
     public void consoleMain() {
         while (true) {
+
             if (displayWelcomeMessage) {
                 System.out.println("Welcome to the GoodReads search CLI: Please enter a function, or enter in --help for a list of approved functions");
                 displayWelcomeMessage= false;
             }
+
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
 
             if (line.equalsIgnoreCase("--help")) {
-                for (String option: userHelpOptions) {
-                    System.out.println(option);
-                }
+                printHelpOptions();
                 continue;
             }
+
             if (line.equalsIgnoreCase("-h") || line.equalsIgnoreCase("--host")) {
-                String hostInfo = "";
-                try {
-                     hostInfo = communication.getHostInformation();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println(hostInfo);
+                getHost();
                 continue;
             }
+
             if (line.equalsIgnoreCase("-s") || line.equalsIgnoreCase("--search")) {
                 System.out.println("you have selected the search function. \n please enter the search term to be sent to GoodReads");
 
@@ -107,6 +102,13 @@ public class CommandLineInterface {
         }
 
     }
+
+    private void printHelpOptions() {
+        for (String option: userHelpOptions) {
+            System.out.println(option);
+        }
+    }
+
     private List<String> populateUserHelpOptions() {
         List<String> userOptions = new ArrayList<>();
         userOptions.add("--help : print out the accepted inputs ");
@@ -115,5 +117,16 @@ public class CommandLineInterface {
         userOptions.add("--sort : sort the search options ");
         userOptions.add("stop : will stop the application");
         return userOptions;
+    }
+
+    private void getHost() {
+        String hostInfo = "";
+        try {
+            hostInfo = communication.getHostInformation();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(hostInfo);
     }
 }
